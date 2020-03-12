@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2861f32e-fec1-45c5-a4a0-3adcf240d420" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1YYbol6cY3ulIiGQkVJDmTmfA5e" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunManager" selected="Python.test">
+    <configuration name="model_2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ReID学习" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model_2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ReID学习" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train_3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ReID学习" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train_3.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.model_2" />
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.train_3" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.train_3" />
+        <item itemvalue="Python.model_2" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2861f32e-fec1-45c5-a4a0-3adcf240d420" name="Default Changelist" comment="" />
+      <created>1583122652777</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583122652777</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="361" y="101" key="#Inspections" timestamp="1583135869018">
+      <screen x="0" y="22" width="1536" height="842" />
+    </state>
+    <state x="361" y="101" key="#Inspections/0.22.1536.842@0.22.1536.842" timestamp="1583135869018" />
+    <state x="223" y="98" width="1089" height="710" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583200734244">
+      <screen x="0" y="22" width="1536" height="842" />
+    </state>
+    <state x="223" y="98" width="1089" height="710" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.22.1536.842@0.22.1536.842" timestamp="1583200734244" />
+    <state x="502" y="249" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1583808067383">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="502" y="249" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1536.824@0.0.1536.824" timestamp="1583808067383" />
+    <state x="449" y="178" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1583281443268">
+      <screen x="0" y="22" width="1536" height="842" />
+    </state>
+    <state x="449" y="178" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.22.1536.842@0.22.1536.842" timestamp="1583281443268" />
+    <state x="327" y="291" key="FileChooserDialogImpl" timestamp="1583810570846">
+      <screen x="0" y="26" width="1920" height="1054" />
+    </state>
+    <state x="548" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1583808066189" />
+    <state x="327" y="291" key="FileChooserDialogImpl/0.26.1920.1054@0.26.1920.1054" timestamp="1583810570846" />
+    <state width="1897" height="255" key="GridCell.Tab.0.bottom" timestamp="1583811065337">
+      <screen x="0" y="26" width="1920" height="1054" />
+    </state>
+    <state width="1515" height="79" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1583736718632" />
+    <state width="1515" height="174" key="GridCell.Tab.0.bottom/0.22.1536.842@0.22.1536.842" timestamp="1583373834993" />
+    <state width="1897" height="255" key="GridCell.Tab.0.bottom/0.26.1920.1054@0.26.1920.1054" timestamp="1583811065337" />
+    <state width="1897" height="255" key="GridCell.Tab.0.center" timestamp="1583811065323">
+      <screen x="0" y="26" width="1920" height="1054" />
+    </state>
+    <state width="1515" height="79" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1583736718632" />
+    <state width="1515" height="174" key="GridCell.Tab.0.center/0.22.1536.842@0.22.1536.842" timestamp="1583373834992" />
+    <state width="1897" height="255" key="GridCell.Tab.0.center/0.26.1920.1054@0.26.1920.1054" timestamp="1583811065323" />
+    <state width="1897" height="255" key="GridCell.Tab.0.left" timestamp="1583811065322">
+      <screen x="0" y="26" width="1920" height="1054" />
+    </state>
+    <state width="1515" height="79" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1583736718632" />
+    <state width="1515" height="174" key="GridCell.Tab.0.left/0.22.1536.842@0.22.1536.842" timestamp="1583373834992" />
+    <state width="1897" height="255" key="GridCell.Tab.0.left/0.26.1920.1054@0.26.1920.1054" timestamp="1583811065322" />
+    <state width="1897" height="255" key="GridCell.Tab.0.right" timestamp="1583811065334">
+      <screen x="0" y="26" width="1920" height="1054" />
+    </state>
+    <state width="1515" height="79" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1583736718632" />
+    <state width="1515" height="174" key="GridCell.Tab.0.right/0.22.1536.842@0.22.1536.842" timestamp="1583373834993" />
+    <state width="1897" height="255" key="GridCell.Tab.0.right/0.26.1920.1054@0.26.1920.1054" timestamp="1583811065334" />
+    <state x="857" y="231" width="1022" height="743" key="SettingsEditor" timestamp="1583851418905">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="270" y="62" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1583808030407" />
+    <state x="270" y="85" key="SettingsEditor/0.22.1536.842@0.22.1536.842" timestamp="1583281264241" />
+    <state x="553" y="227" width="1022" height="743" key="SettingsEditor/0.26.1920.1054@0.26.1920.1054" timestamp="1583810627456" />
+    <state x="857" y="231" width="1022" height="743" key="SettingsEditor/0.30.1920.1050@0.30.1920.1050" timestamp="1583851418905" />
+    <state x="643" y="372" key="com.intellij.ide.util.TipDialog" timestamp="1583806011528">
+      <screen x="0" y="26" width="1920" height="1054" />
+    </state>
+    <state x="643" y="372" key="com.intellij.ide.util.TipDialog/0.26.1920.1054@0.26.1920.1054" timestamp="1583806011527" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1583731201396">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1583731201396" />
+  </component>
+</project>

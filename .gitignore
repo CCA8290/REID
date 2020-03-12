@@ -1,0 +1,9 @@
+.idead/
+.vscode/
+__pycache__/
+一些结果/
+PCB.pdf
+# Windows:
+Thumbs.db
+ehthumbs.db
+Desktop.ini
