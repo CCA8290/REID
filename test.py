@@ -42,8 +42,22 @@ a=torch.tensor([[1,2],[3,4]])
 b=torch.tensor([[1,2,3],[4,5,6]])
 #print(torch.mm(a,b))
 print(b.view(-1,1))
-'''
+
 a=np.array([3,2,2,-1,7,6])
 b=np.array([3,2,1])
 c=np.intersect1d(a,b,assume_unique=True)
 print(c)
+'''
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from mainwindow import *
+class MyWindow(QMainWindow,Ui_MainWindow):
+    def __init__(self,parent=None):
+        super(MyWindow,self).__init__(parent)
+        self.setupUi(self)
+
+if __name__=='__main__':
+    app=QApplication(sys.argv)
+    myWin=MyWindow()
+    myWin.show()
+    sys.exit(app.exec_())

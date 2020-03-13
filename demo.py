@@ -5,29 +5,18 @@ import numpy as np
 import os
 from torchvision import datasets
 import matplotlib
-matplotlib.use('agg')
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
-#######################################################################
-# Evaluate
+
+#---------------------------------1、设置参数，载入query和gallery-----------------------------
 parser = argparse.ArgumentParser(description='Demo')
-parser.add_argument('--query_index', default=777, type=int, help='test_image_index')
+parser.add_argument('--query_index', default=0, type=int, help='test_image_index')
 parser.add_argument('--test_dir',default='Market/pytorch',type=str, help='./test_data')
 opts = parser.parse_args()
-
 data_dir = opts.test_dir
 image_datasets = {x: datasets.ImageFolder( os.path.join(data_dir,x) ) for x in ['gallery','query']}
 
-#####################################################################
-#Show result
-def imshow(path, title=None):
-    """Imshow for Tensor."""
-    im = plt.imread(path)
-    plt.imshow(im)
-    if title is not None:
-        plt.title(title)
-    plt.pause(0.001)  # pause a bit so that plots are updated
-
-######################################################################
+#---------------------------------2、读取结果，分类图片---------------------------------------
 result = scipy.io.loadmat('pytorch_result.mat')
 query_feature = torch.FloatTensor(result['query_f'])
 query_cam = result['query_cam'][0]
@@ -36,12 +25,9 @@ gallery_feature = torch.FloatTensor(result['gallery_f'])
 gallery_cam = result['gallery_cam'][0]
 gallery_label = result['gallery_label'][0]
 
+#query_feature = query_feature.cuda()
+#gallery_feature = gallery_feature.cuda()
 
-query_feature = query_feature.cuda()
-gallery_feature = gallery_feature.cuda()
-
-#######################################################################
-# sort the images
 def sort_img(qf, ql, qc, gf, gl, gc):
     query = qf.view(-1,1)
     # print(query.shape)
@@ -69,8 +55,14 @@ def sort_img(qf, ql, qc, gf, gl, gc):
 i = opts.query_index
 index = sort_img(query_feature[i],query_label[i],query_cam[i],gallery_feature,gallery_label,gallery_cam)
 
-########################################################################
-# Visualize the rank result
+#---------------------------------3、可视化结果，保存图片-------------------------------------
+#Show result
+def imshow(path, title=None):
+    im = plt.imread(path)
+    plt.imshow(im)
+    if title is not None:
+        plt.title(title)
+    plt.pause(0.001)  
 
 query_path, _ = image_datasets['query'].imgs[i]
 query_label = query_label[i]

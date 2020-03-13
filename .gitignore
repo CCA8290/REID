@@ -1,4 +1,4 @@
-.idead/
+.idea/
 .vscode/
 __pycache__/
 一些结果/
@@ -7,3 +7,6 @@ PCB.pdf
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+test.py
+Learn0312.html
+web.py
