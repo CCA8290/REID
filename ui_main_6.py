@@ -13,6 +13,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *   
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+#---------------------------------1、控件类，设置控件属性--------------------------- 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -231,19 +232,20 @@ class Ui_MainWindow(object):
         btn_3=self.pushButton_3
         btn_3.clicked.connect(self.clear_output)
 
-    def openimage(self):
+    def openimage(self):     #点击按钮打开图片
         imgName, imgType = QFileDialog.getOpenFileName(self, "打开图片", "", "*.jpg;;*.png;;All Files(*)")
         self.pic_path=imgName      #保存图片路径
         #self.textBrowser.append('图片路径为:'+imgName)
         jpg = QtGui.QPixmap(imgName).scaled(self.label.width(), self.label.height())
         self.label.setPixmap(jpg)
-    def clear_output(self):
+    def clear_output(self):  #清空所有输出
         self.label.setPixmap(QtGui.QPixmap())
         for i in range(10):
             self.pic[i].setPixmap(QtGui.QPixmap())
             self.pic[i].setStyleSheet("background:white;")
         self.textBrowser.clear()
-
+        
+#------------------------------2、核心程序，处理行人重识别-------------------------- 
 class Demo(QWidget,Ui_MainWindow):
     def __init__(self, parent=None):
         super(Demo, self).__init__(parent)
@@ -259,6 +261,7 @@ class Demo(QWidget,Ui_MainWindow):
         self.gallery_cam = self.result['gallery_cam'][0]
         self.gallery_label = self.result['gallery_label'][0] 
         self.pic_path=''
+
     def sort_img(self,qf, ql, qc, gf, gl, gc):
         query = qf.view(-1,1)
         #求距离
@@ -315,8 +318,8 @@ class Demo(QWidget,Ui_MainWindow):
             else:                     
                 self.textBrowser.append('匹配错误\n')
                 self.pic[i].setStyleSheet("border-width: 2px;border-style: solid;border-color: rgb(255, 0, 0)")            
-            #time.sleep(0.1)
-#---------------------------------2、主窗口，继承上述控件类------------------------- 
+
+#---------------------------------3、主窗口，继承上述两个类------------------------- 
 class MyWindow(QMainWindow,Demo):
     def __init__(self, parent=None):
         super(MyWindow, self).__init__(parent)

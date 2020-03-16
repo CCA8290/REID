@@ -14,7 +14,7 @@ def evaluate(qf,ql,qc,gf,gl,gc):
     #处理index
     index = np.argsort(score)      #按照元素从小到大记录下标，size为测试集图片数量
     index = index[::-1]            #逆序，就表示元素从大到小的下标，size:19732
-    #筛选index
+    #筛选index 
     query_index = np.argwhere(gl==ql)
     camera_index = np.argwhere(gc==qc)
     #计算差集，不去重
@@ -59,7 +59,7 @@ def compute_mAP(index, good_index, junk_index):
     return ap, cmc
 
 #---------------------------------2、主程序实现---------------------------------------------
-result = scipy.io.loadmat('/content/pytorch_result.mat')  #加载保存的结果
+result = scipy.io.loadmat('C:/Users/CCA82/Desktop/Reid_origin/pytorch_result.mat')  #加载保存的结果
 query_feature = torch.FloatTensor(result['query_f'])      #query特征，[3368, 512]
 query_cam = result['query_cam'][0]                        #query摄像头号,[3368,]
 query_label = result['query_label'][0]                    #query标签，[3368，]
@@ -67,8 +67,8 @@ gallery_feature = torch.FloatTensor(result['gallery_f'])  #gallery特征,[19732,
 gallery_cam = result['gallery_cam'][0]                    #gallery摄像头号,[19732,]
 gallery_label = result['gallery_label'][0]                #gallery标签
 #以上数据都是二维，加[0]表示取一维
-query_feature = query_feature.cuda()                      #放入显存
-gallery_feature = gallery_feature.cuda()
+#query_feature = query_feature.cuda()                      #放入显存
+#gallery_feature = gallery_feature.cuda()
 
 print('query图片数量为：',len(query_label))
 print('gallery图片数量为：',len(gallery_label))                              
