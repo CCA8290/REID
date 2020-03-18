@@ -1,4 +1,17 @@
 # 3月15-18号学习
+<!-- TOC -->
+
+- [3月15-18号学习](#3月15-18号学习)
+    - [1 任务](#1-任务)
+    - [2 Python及Qt](#2-python及qt)
+        - [2.1 Qt](#21-qt)
+        - [2.2 模型、python学习](#22-模型python学习)
+            - [2.2.1 初始化方法（xavier和kaiming）](#221-初始化方法xavier和kaiming)
+            - [2.2.2 PyTorch前向传播函数forward](#222-pytorch前向传播函数forward)
+            - [2.2.3 PyTorch nn.Linear()](#223-pytorch-nnlinear)
+            - [2.2.4 PyTorch view()](#224-pytorch-view)
+
+<!-- /TOC -->
 ## 1 任务
 1. 学习Qt
 2. 完成程序工作
@@ -36,7 +49,7 @@
 >```python
 >torch.nn.init.kaiming_uniform_(tensor, a=0, mode='fan_in', nonlinearity='leaky_relu')
 >```
->![he1](https://raw.githubusercontent.com/CCA8290/Pic_save/master/200317/he_uniform.jpg) 
+>![he1](https://raw.githubusercontent.com/CCA8290/Pic_save/master/200317/he_uniform.jpg)     
 >也被称为 He initialization。   
 >**a** – the negative slope of the rectifier used after this layer (0 for ReLU by default).激活函数的负斜率。   
 >**mode** – either ‘fan_in' (default) or ‘fan_out'. Choosing fan_in preserves the magnitude of the variance of the weights in the forward pass. Choosing fan_out preserves the magnitudes in the backwards pass.        
