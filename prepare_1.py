@@ -4,8 +4,8 @@ from shutil import copyfile
 #数据集的路径
 download_path = 'Market'
 
-if not os.path.isdir(download_path):    #用来判断download_path是否为目录
-    print('please change the download_path')
+if not os.path.isdir(download_path):    #用来判断download_path是否存在
+    print('未找到数据集，请重新选择路径！')
 save_path = download_path + '/pytorch'  #分类后保存路径
 if not os.path.isdir(save_path):        #判断保存路径是否存在
     os.mkdir(save_path)                 #不存在则创建

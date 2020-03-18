@@ -254,8 +254,6 @@ else:
                      +list(map(id, model.classifier3.parameters() ))
                      +list(map(id, model.classifier4.parameters() ))
                      +list(map(id, model.classifier5.parameters() ))
-                     #+list(map(id, model.classifier6.parameters() ))
-                     #+list(map(id, model.classifier7.parameters() ))
                       )
     base_params = filter(lambda p: id(p) not in ignored_params, model.parameters())
     optimizer_ft = optim.SGD([
@@ -266,9 +264,7 @@ else:
              {'params': model.classifier2.parameters(), 'lr': opt.lr},
              {'params': model.classifier3.parameters(), 'lr': opt.lr},
              {'params': model.classifier4.parameters(), 'lr': opt.lr},
-             {'params': model.classifier5.parameters(), 'lr': opt.lr},
-             #{'params': model.classifier6.parameters(), 'lr': 0.01},
-             #{'params': model.classifier7.parameters(), 'lr': 0.01}
+             {'params': model.classifier5.parameters(), 'lr': opt.lr}
          ], weight_decay=5e-4, momentum=0.9, nesterov=True)
 
 #每40轮学习率减少0.1

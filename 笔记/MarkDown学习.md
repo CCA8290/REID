@@ -51,3 +51,8 @@ public class ScannerTest {
 \<sup>表示上标：X<sup>3</sup>
 ### 7、数学公式
 参考：[Markdown公式指导手册](https://www.zybuluo.com/codeep/note/163962)
+### 8、空格怎么打
+参考：[简书](https://www.jianshu.com/p/31eade263e7a)    
+``&ensp;``表示一个空格大小，注意带上分号    
+``&emsp;``表示两个空格大小
+一个汉字占两个空格大小，四个空格即可实现首行缩进两个汉字效果
