@@ -117,8 +117,6 @@ y_err['val'] = []
 
 def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
     since = time.time()  #计时
-    #best_model_wts = model.state_dict()
-    #best_acc = 0.0
     for epoch in range(num_epochs):
         print('Epoch {}/{}'.format(epoch, num_epochs - 1))
         print('-' * 10)         #输出训练到第几轮
@@ -165,7 +163,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
                         part[i] = outputs[i]
 
                     score = sm(part[0]) + sm(part[1]) +sm(part[2]) + sm(part[3]) +sm(part[4]) +sm(part[5])
-                    _, preds = torch.max(score.data, 1)   #分类结果
+                    _, preds = torch.max(score.data, 1)   #分类结果,1代表第二维最大值
 
                     loss = criterion(part[0], labels)  #每个parts单独计算损失
                     for i in range(num_part-1):
@@ -194,12 +192,12 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
                 draw_curve(epoch)  #画损失和误差曲线
         # 记录每一轮的训练时间
         time_elapsed = time.time() - since
-        print('Training complete in {:.0f}m {:.0f}s'.format(
+        print('这一轮训练时间 {:.0f}m {:.0f}s'.format(
             time_elapsed // 60, time_elapsed % 60))   #//表示整除
         print()
     #记录模型总训练时间
     time_elapsed = time.time() - since
-    print('Training complete in {:.0f}m {:.0f}s'.format(
+    print('总训练时长 {:.0f}m {:.0f}s'.format(
         time_elapsed // 60, time_elapsed % 60))
 
     model.load_state_dict(last_model_wts)
@@ -240,12 +238,13 @@ print(model)   #输出模型结构
 #如果不用PCB
 if not opt.PCB:
     ignored_params = list(map(id, model.classifier.parameters() ))  #id用于获取对象内存地址
-    base_params = filter(lambda p: id(p) not in ignored_params, model.parameters())
+    base_params = filter(lambda p: id(p) not in ignored_params, model.parameters()) #去掉分类器参数
     optimizer_ft = optim.SGD([
              {'params': base_params, 'lr': 0.1*opt.lr},
-             {'params': model.classifier.parameters(), 'lr': opt.lr}
+             {'params': model.classifier.parameters(), 'lr': opt.lr}   #不同层用不同的学习率
          ], weight_decay=5e-4, momentum=0.9, nesterov=True)    #调用SGD优化方法
     #weight_decay：限制自由参数数量防止过拟合
+    #Nesterov：对momentum的改进，该梯度下降法又叫NAG
 else:
     ignored_params = list(map(id, model.model.fc.parameters() ))
     ignored_params += (list(map(id, model.classifier0.parameters() ))
@@ -257,7 +256,7 @@ else:
                       )
     base_params = filter(lambda p: id(p) not in ignored_params, model.parameters())
     optimizer_ft = optim.SGD([
-             {'params': base_params, 'lr': 0.1*opt.lr},      #各层可以采用不同的学习率，parts=6，一共六层
+             {'params': base_params, 'lr': 0.1*opt.lr},     
              {'params': model.model.fc.parameters(), 'lr': opt.lr},
              {'params': model.classifier0.parameters(), 'lr': opt.lr},
              {'params': model.classifier1.parameters(), 'lr': opt.lr},

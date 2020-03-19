@@ -8,7 +8,7 @@ import os
 def evaluate(qf,ql,qc,gf,gl,gc):
     query = qf.view(-1,1)          #变为列向量
     #求距离
-    score = torch.mm(gf,query)     #矩阵相乘，由于已经求出L2范数，相乘即为余弦距离
+    score = torch.mm(gf,query)     #矩阵相乘，由于已经求出L2范数，相乘即为余弦相似度
     score = score.squeeze(1).cpu() #去掉维数为1的维度
     score = score.numpy()          #转为numpy
     #处理index
