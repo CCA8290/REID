@@ -233,10 +233,12 @@ class Ui_MainWindow(object):
         btn_3.clicked.connect(self.clear_output)
 
     def openimage(self):     #点击按钮打开图片
-        imgName, imgType = QFileDialog.getOpenFileName(self, "打开图片", "", "*.jpg;;*.png;;All Files(*)")
+        imgName, imgType = QFileDialog.getOpenFileName(self, 
+                        "打开图片", "", "*.jpg;;*.png;;All Files(*)")
         self.pic_path=imgName      #保存图片路径
         #self.textBrowser.append('图片路径为:'+imgName)
-        jpg = QtGui.QPixmap(imgName).scaled(self.label.width(), self.label.height())
+        jpg = QtGui.QPixmap(imgName).scaled(self.label.width(), 
+                         self.label.height())
         self.label.setPixmap(jpg)
     def clear_output(self):  #清空所有输出
         self.label.setPixmap(QtGui.QPixmap())
@@ -253,7 +255,7 @@ class Demo(QWidget,Ui_MainWindow):
         self.image_datasets = {x: datasets.ImageFolder( os.path.join(self.data_dir,x) ) 
         for x in ['gallery','query']}
 
-        self.result = scipy.io.loadmat('C:/Users/CCA82/Desktop/Reid_origin/pytorch_result.mat')
+        self.result = scipy.io.loadmat('C:/Users/CCA82/Desktop/Reid_origin/market_result.mat')
         self.query_feature = torch.FloatTensor(self.result['query_f'])
         self.query_cam = self.result['query_cam'][0]
         self.query_label = self.result['query_label'][0]

@@ -85,24 +85,6 @@ class ft_net(nn.Module):
         x = self.classifier(x)
         return x
 
-#DenseNet-121网络模型
-class ft_net_dense(nn.Module):
-
-    def __init__(self, class_num, droprate=0.5):
-        super().__init__()
-        model_ft = models.densenet121(pretrained=True)
-        model_ft.features.avgpool = nn.AdaptiveAvgPool2d((1,1))
-        model_ft.fc = nn.Sequential()
-        self.model = model_ft
-        #DenseNet的结构，特征维数是1024
-        self.classifier = ClassBlock(1024, class_num, droprate)
-
-    def forward(self, x):
-        x = self.model.features(x)
-        x = x.view(x.size(0), x.size(1))
-        x = self.classifier(x)
-        return x
-
 #定义baseline --PCB，也是算法的核心
 class PCB(nn.Module):
     def __init__(self, class_num ):

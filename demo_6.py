@@ -49,7 +49,7 @@ def sort_img(qf, ql, qc, gf, gl, gc):
     index = index[mask]
     return index
 #根据图片取得图片在mat中的索引
-pic='0145_c3s1_023426_00.jpg'
+pic='1151_c2s3_003407_00.jpg'
 for i in range(len(query_label)):
     pic_path,_=image_datasets['query'].imgs[i]
     if(pic==os.path.basename(pic_path)):

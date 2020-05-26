@@ -12,7 +12,7 @@ import os
 import scipy.io
 import yaml
 import math
-from model_2 import ft_net,PCB, PCB_test
+from model_2 import ft_net,PCB, PCB_test,ft_net_dense
 
 #---------------------------------1、设置程序执行参数----------------------------------------
 parser = argparse.ArgumentParser(description='Training')     #创建对象
@@ -22,12 +22,14 @@ parser.add_argument('--test_dir',default='/content/Market/pytorch',type=str, hel
 parser.add_argument('--name', default='ft_ResNet50', type=str, help='save model path')
 parser.add_argument('--batchsize', default=256, type=int, help='batchsize')
 parser.add_argument('--PCB', action='store_true', help='use PCB' )
+parser.add_argument('--use_dense', action='store_true', help='use densenet121' )
 opt = parser.parse_args()
 
 config_path = os.path.join('/content/GPUID/model',opt.name,'opts.yaml') #载入配置文件
 with open(config_path, 'r') as stream:
         config = yaml.load(stream,Loader=yaml.FullLoader)   #新版本需要加Loader=yaml.FullLoader
 opt.PCB = config['PCB']
+opt.use_dense = config['use_dense']
 opt.stride = config['stride']
 
 if 'nclasses' in config: #在配置文件寻找分类数目
@@ -142,7 +144,10 @@ gallery_cam,gallery_label = get_id(gallery_path)    #获取相机id和标签
 query_cam,query_label = get_id(query_path)
 #加载训练好的模型
 print('---------------测试---------------')
-model_structure = ft_net(opt.nclasses, stride = opt.stride)
+if opt.use_dense:
+    model_structure = ft_net_dense(opt.nclasses)
+else:
+    model_structure = ft_net(opt.nclasses, stride = opt.stride)
 if opt.PCB:
     model_structure = PCB(opt.nclasses)
 model = load_network(model_structure)

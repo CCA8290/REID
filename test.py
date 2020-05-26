@@ -88,3 +88,16 @@ newlist=map(None,[1,2,3],[4,5,6])
 print(next(newlist))
 print(next(newlist))
 print(next(newlist))
+
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow
+#import gui_file_name
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    MainWindow = QMainWindow()
+    #ui = gui_file_name.Ui_MainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())

@@ -13,10 +13,10 @@ matplotlib.use('agg') #Linux系统在没有GUI的情况下可以绘图
 import matplotlib.pyplot as plt
 import time
 import os
-from model_2 import ft_net,PCB,ft_net_dense #从model导入定义的模型
+from model import ft_net,PCB #从model导入定义的模型
 import yaml
 from shutil import copyfile
-#Git可以方便地管理项目版本
+
 #---------------------------------1、设置程序执行参数----------------------------------------
 #参数设置
 parser = argparse.ArgumentParser(description='Training')
@@ -29,7 +29,7 @@ parser.add_argument('--stride', default=2, type=int, help='stride') #Resnet里�
 parser.add_argument('--lr', default=0.05, type=float, help='learning rate')
 parser.add_argument('--droprate', default=0.5, type=float, help='drop rate')
 parser.add_argument('--PCB', action='store_true', help='use PCB+ResNet50' )
-parser.add_argument('--use_dense', action='store_true', help='use densenet121' )  #是否使用DenseNet
+parser.add_argument('--RPP', action='store_true', help='use RPP', default=True)
 opt = parser.parse_args()   #将参数存到opt
 
 data_dir = opt.data_dir #已分类数据集目录
@@ -63,7 +63,7 @@ transform_val_list = [
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
         ]
 #-------------如果使用PCB--------------
-if opt.PCB:
+if opt.RPP:
     transform_train_list = [
         transforms.Resize((384,192), interpolation=3),#如果用PCB，尺寸变为384x192
         transforms.RandomHorizontalFlip(),
@@ -152,11 +152,8 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
                 else:
                     outputs = model(inputs)   #shape：对于market是batch*751
 
-                #根据有没有用到PCB
-                if not opt.PCB:
-                    _, preds = torch.max(outputs.data, 1)  #返回每列最大值及索引得到一个batch的分类结果
-                    loss = criterion(outputs, labels)   #求出loss
-                else:
+                
+                if opt.RPP:
                     part = {}
                     sm = nn.Softmax(dim=1) #对单个样本输出结果softmax，按照每一行
                     num_part = 6  #切成6块
@@ -231,38 +228,33 @@ def save_network(network, epoch_label):
 
 #---------------------------------6、设置网络、加载模型--------------------------------------
 #这里加入了len(classname)，可以根据数据集判断多少类，从而适用不同的数据集
-if opt.use_dense: #载入DenseNet-121模型
-    model = ft_net_dense(len(class_names), opt.droprate)
-else:
-    model = ft_net(len(class_names), opt.droprate, opt.stride)  #载入ResNet网络模型
 
-if opt.PCB:
+if opt.RPP:
     model = PCB(len(class_names))
+    model=model.convert_to_rpp()
 opt.nclasses = len(class_names)  #记录分类数
 print(model)   #输出模型结构
-#如果不用PCB
-if not opt.PCB:
-    ignored_params = list(map(id, model.classifier.parameters() ))  #id用于获取对象内存地址
-    base_params = filter(lambda p: id(p) not in ignored_params, model.parameters()) #去掉分类器参数
-    optimizer_ft = optim.SGD([
-             {'params': base_params, 'lr': 0.1*opt.lr},
-             {'params': model.classifier.parameters(), 'lr': opt.lr}   #不同层用不同的学习率
-         ], weight_decay=5e-4, momentum=0.9, nesterov=True)    #调用SGD优化方法
-    #weight_decay：限制自由参数数量防止过拟合
-    #Nesterov：对momentum的改进，该梯度下降法又叫NAG
-else:
-    ignored_params = list(map(id, model.model.fc.parameters() ))
-    ignored_params += (list(map(id, model.classifier0.parameters() ))
+
+#ignored_params = list(map(id, model.avgpool.parameters()))
+#base_params = filter(lambda p: id(p) not in ignored_params, model.parameters())
+#optimizer_ft = optim.SGD([
+        #{'params': base_params, 'lr': 0.00},
+        #{'params': model.avgpool.parameters(), 'lr': 0.01},
+     #], weight_decay=5e-4, momentum=0.9, nesterov=True)
+ignored_params = list(map(id, model.model.fc.parameters() ))
+ignored_params +=(list(map(id, model.avgpool.parameters()))
+                     +list(map(id, model.classifier0.parameters() ))
                      +list(map(id, model.classifier1.parameters() ))
                      +list(map(id, model.classifier2.parameters() ))
                      +list(map(id, model.classifier3.parameters() ))
                      +list(map(id, model.classifier4.parameters() ))
                      +list(map(id, model.classifier5.parameters() ))
                       )
-    base_params = filter(lambda p: id(p) not in ignored_params, model.parameters())
-    optimizer_ft = optim.SGD([
-             {'params': base_params, 'lr': 0.1*opt.lr},     
+base_params = filter(lambda p: id(p) not in ignored_params, model.parameters())
+optimizer_ft = optim.SGD([
+             {'params': base_params, 'lr': 0.1*opt.lr}, 
              {'params': model.model.fc.parameters(), 'lr': opt.lr},
+             {'params': model.avgpool.parameters(), 'lr': opt.lr},
              {'params': model.classifier0.parameters(), 'lr': opt.lr},
              {'params': model.classifier1.parameters(), 'lr': opt.lr},
              {'params': model.classifier2.parameters(), 'lr': opt.lr},
@@ -270,10 +262,6 @@ else:
              {'params': model.classifier4.parameters(), 'lr': opt.lr},
              {'params': model.classifier5.parameters(), 'lr': opt.lr}
          ], weight_decay=5e-4, momentum=0.9, nesterov=True)
-
-#每40轮学习率减少0.1
-exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=40, gamma=0.1)
-
 #---------------------------------7、主程序，训练、评估--------------------------------------
 dir_name = os.path.join('/content/GPUID/model',name)     #模型保存的位置
 if not os.path.isdir(dir_name):
@@ -289,5 +277,9 @@ with open('%s/opts.yaml'%dir_name,'w') as fp:
 #用gpu训练
 model = model.cuda()
 criterion = nn.CrossEntropyLoss()      #交叉熵损失函数
-model = train_model(model, criterion, optimizer_ft, exp_lr_scheduler,num_epochs=60)  #训练60轮
+#model = train_model(model, criterion, optimizer_ft, exp_lr_scheduler,num_epochs=60)  #训练60轮
+
+exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=40, gamma=0.1)
+model = train_model(model, criterion, optimizer_ft, exp_lr_scheduler,num_epochs=60)
+
 
